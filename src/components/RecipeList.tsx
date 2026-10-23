@@ -62,7 +62,10 @@ export default function RecipeList({ recipes, email, loadError }: { recipes: Rec
           <h1>レシピDB</h1>
           <small>{recipes.length}品</small>
         </div>
-        <SignOut email={email} />
+        <div className="chips">
+          <Link className="btn sm" href="/plan">📅 献立</Link>
+          <SignOut email={email} />
+        </div>
       </header>
 
       {loadError && <p className="err">レシピを読み込めませんでした（{loadError}）。少し待ってから開き直してください。</p>}

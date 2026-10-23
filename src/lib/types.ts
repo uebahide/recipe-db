@@ -53,3 +53,20 @@ export type RecipeStats = {
 
 /** 一覧で使う形: レシピ + 熟練度 + 写真の表示用URL */
 export type RecipeCard = Recipe & { stats: RecipeStats | null; photoUrl: string | null };
+
+export type Meal = "breakfast" | "lunch" | "dinner" | "snack";
+
+export type MealPlan = {
+  id: string;
+  planned_on: string;
+  meal: Meal;
+  position: number;
+  recipe_id: string | null;
+  title: string;
+  note: string | null;
+  status: "planned" | "cooked" | "skipped";
+  cook_log_id: string | null;
+};
+
+/** 献立に入れるレシピを選ぶときに使う形 */
+export type RecipeOption = Pick<Recipe, "id" | "title" | "category" | "is_favorite">;

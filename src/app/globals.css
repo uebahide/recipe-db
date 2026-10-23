@@ -161,6 +161,70 @@ button.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--acc
 .savebar{position:sticky;bottom:calc(10px + env(safe-area-inset-bottom,0px));display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap;align-items:center;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);padding:10px;border-radius:999px;border:1px solid var(--line)}
 .confirm{display:flex;gap:8px;align-items:center;flex-wrap:wrap;color:var(--danger);font-size:.9rem}
 
+/* meal plan calendar: month grid of day buttons; each dish is a short line with a colored edge per meal (saffron 朝, herb 昼, chili 夜) */
+.monthnav{display:flex;align-items:center;gap:8px}
+.monthnav h2{font-size:1.2rem;min-width:0}
+.legend{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-size:.8rem}
+.it{border-left:3px solid var(--line);padding-left:5px;line-height:1.3}
+.it.breakfast{border-color:var(--saffron)}
+.it.lunch{border-color:var(--accent)}
+.it.dinner{border-color:var(--chili)}
+.it.snack{border-color:var(--muted)}
+.cal{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.cal .wk{display:grid;grid-template-columns:repeat(7,minmax(0,1fr))}
+.dow{font-size:.75rem;color:var(--muted);text-align:center;padding:6px 0;border-bottom:1px solid var(--line);font-weight:700}
+.dow.sun{color:var(--chili)}
+.dow.sat{color:var(--accent)}
+.day{border:0;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:none;text-align:left;padding:4px 5px 6px;min-height:96px;display:flex;flex-direction:column;gap:2px;min-width:0;border-radius:0}
+.day:nth-child(7n){border-right:0}
+.day:hover{background:var(--accent-soft)}
+.day.out{background:var(--soft)}
+.day.out .d{opacity:.5}
+.day .d{font-family:var(--mono);font-size:.78rem;align-self:flex-start;padding:0 6px;border-radius:999px}
+.day.today .d{background:var(--accent);color:var(--accent-ink)}
+.day .it{font-size:.74rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.it.cooked::before{content:"✓ ";color:var(--accent);font-weight:700}
+.it.skipped{text-decoration:line-through;opacity:.5}
+.day.past .it.planned{opacity:.75}
+.day .more{font-size:.7rem;color:var(--muted)}
+
+.backdrop{position:fixed;inset:0;z-index:20;background:rgba(10,20,15,.45);display:flex;align-items:flex-end;justify-content:center}
+.daysheet{background:var(--paper);width:100%;max-width:560px;max-height:88dvh;overflow-y:auto;border-radius:22px 22px 0 0;padding:16px 18px calc(20px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:14px}
+.daysheet .foot{padding:12px 0 0}
+@media (min-width:700px){.backdrop{align-items:center}.daysheet{border-radius:22px}}
+.mealsec{display:flex;flex-direction:column;gap:4px;border-left:3px solid var(--line);padding-left:12px}
+.mealsec.breakfast{border-color:var(--saffron)}
+.mealsec.lunch{border-color:var(--accent)}
+.mealsec.dinner{border-color:var(--chili)}
+.mealsec.snack{border-color:var(--muted)}
+.mh{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.mh h3{font-size:1rem}
+.none{font-size:.85rem}
+.pitem{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:4px 10px;padding:6px 0;border-bottom:1px dashed var(--line)}
+.pitem:last-of-type{border-bottom:0}
+.pitem .pt{display:flex;align-items:center;gap:8px;min-width:0;overflow-wrap:anywhere}
+.pitem .pt a{text-decoration:none;font-weight:500}
+.pitem.skipped .pt > :first-child{text-decoration:line-through;color:var(--muted)}
+.st{font-size:.72rem;border-radius:999px;padding:0 8px;background:var(--soft);color:var(--muted);white-space:nowrap}
+.st.cooked{background:var(--accent-soft);color:var(--accent);font-weight:700}
+.acts,.rate{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.star{border:0;background:none;font-size:1.25rem;color:var(--line);padding:0 2px;min-width:30px;min-height:36px}
+.star[aria-pressed="true"]{color:var(--saffron)}
+.picker{display:flex;flex-direction:column;gap:8px;align-items:flex-start;padding:6px 0}
+.opts{display:flex;flex-direction:column;gap:4px;width:100%}
+.opt{display:flex;justify-content:space-between;gap:10px;align-items:center;text-align:left;border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:8px 12px;width:100%}
+.opt:hover{border-color:var(--accent)}
+.opt.free{border-style:dashed}
+
+.shop{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.shop li{border-bottom:1px dashed var(--line)}
+.shop li:last-child{border-bottom:0}
+.shop label{display:grid;grid-template-columns:24px minmax(0,auto) minmax(0,1fr);gap:4px 10px;align-items:center;padding:9px 0;cursor:pointer}
+.shop input{width:20px;height:20px;accent-color:var(--accent);margin:0}
+.shop .nm{font-weight:500}
+.shop small{font-size:.8rem;text-align:right;overflow-wrap:anywhere}
+.shop li.done .nm{text-decoration:line-through;color:var(--muted)}
+
 @media (max-width:600px){
   input,select,textarea{font-size:16px}
   .brand h1{font-size:1.35rem}
@@ -175,5 +239,11 @@ button.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--acc
   .irow{grid-template-columns:4em minmax(0,1fr) 5.5em auto}
   .srow .sub{grid-template-columns:1fr}
   .slider{grid-template-columns:5.2em minmax(0,1fr) 1.2em}
+  .day{min-height:76px;padding:3px 2px 4px}
+  .day .it{font-size:.62rem;padding-left:3px;border-left-width:2px}
+  .day .d{font-size:.7rem;padding:0 4px}
+  .day .more{font-size:.6rem}
+  .shop label{grid-template-columns:24px minmax(0,1fr)}
+  .shop small{grid-column:2;text-align:left}
 }
 @media (prefers-reduced-motion:reduce){.card{transition:none}.card:hover{transform:none}}
