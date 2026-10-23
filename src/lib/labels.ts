@@ -1,4 +1,4 @@
-import type { Mastery, Recipe } from "./types";
+import type { Mastery, Meal, Recipe } from "./types";
 
 // DB に入る値（英語）と画面に出す言葉（日本語）の対応
 
@@ -60,6 +60,13 @@ export const MASTERY: Record<Mastery, { label: string; level: number }> = {
   confident: { label: "得意", level: 3 },
   signature: { label: "十八番", level: 4 },
 };
+
+export const MEALS: [Meal, string][] = [
+  ["breakfast", "朝"],
+  ["lunch", "昼"],
+  ["dinner", "夜"],
+  ["snack", "間食"],
+];
 
 export const label = (list: [string, string][], value: string | null | undefined) =>
   list.find(([v]) => v === value)?.[1] ?? "";
